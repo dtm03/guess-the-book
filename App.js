@@ -1,20 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import GameScreen from './screens/GameScreen';
+import StartScreen from './screens/StartScreen';
+import { useFonts, Mulish_400Regular, Mulish_600SemiBold, Mulish_700Bold, Mulish_800ExtraBold } from '@expo-google-fonts/mulish';
+
+const Stack = createStackNavigator();
+
+// Fix stat updates and write tests
+// Create a logo for the app using stability.ai
+// Implement API calls to fetch movie data
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    let [fontsLoaded] = useFonts({
+        Mulish: Mulish_400Regular,
+        MulishSemiBold: Mulish_600SemiBold,
+        MulishBold: Mulish_700Bold,
+        MulishExtraBold: Mulish_800ExtraBold
+    });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    if (!fontsLoaded) {
+        return null;
+    }
+
+    return (
+        <NavigationContainer>
+            <Stack.Navigator
+                initialRouteName="Start"
+                screenOptions={{
+                    headerShown: false
+                }}
+            >
+                <Stack.Screen name="Game" component={GameScreen} />
+                <Stack.Screen name="Start" component={StartScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+}
