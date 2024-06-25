@@ -101,6 +101,11 @@ const styles = StyleSheet.create({
         fontSize: 34,
         fontFamily: 'MulishExtraBold',
     },
+    image: {
+        width: 300,
+        height: 300,
+        borderRadius: 150,
+    },
 });
 
 export default styles;

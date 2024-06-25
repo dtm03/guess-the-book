@@ -8,10 +8,9 @@ import {handleNewHint, takeGuess, resetGame} from '../utils/gameUtils';
 import {useGameState} from '../hooks/useGameState';
 
 export default function GameScreen() {
-
-    const navigation = useNavigation();
-    const isFocused = useIsFocused();
     const gameState = useGameState();
+    const isFocused = useIsFocused();
+    const navigation = useNavigation();
     const hints = ['The movie features Will Smith', 'The movie also features Margot Robbie'
         , 'The movie was released in 2015', 'The movie is about a group of thieves', 'The movie is set in Buenos Aires'];
     const solution = 'focus';
@@ -39,4 +38,5 @@ export default function GameScreen() {
             </TouchableOpacity>
         </KeyboardAvoidingView>
     );
+
 }

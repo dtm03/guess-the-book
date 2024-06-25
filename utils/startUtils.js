@@ -8,19 +8,13 @@ export const handlePlay = async (stats, navigation) => {
 };
 
 export const getPersistentStates = async (stats, route) => {
-    let storedRoundsPlayed = await AsyncStorage.getItem('roundsPlayed');
-    let storedHighScore = await AsyncStorage.getItem('highScore');
-    let storedMoviesGuessed = await AsyncStorage.getItem('moviesGuessed');
+    let storedRoundsPlayed = await AsyncStorage.getItem('roundsPlayed') || '0';
+    let storedHighScore = await AsyncStorage.getItem('highScore') || '0';
+    let storedMoviesGuessed = await AsyncStorage.getItem('moviesGuessed') || '0';
 
-    if (storedRoundsPlayed) {
-        stats.setRoundsPlayed(parseInt(storedRoundsPlayed));
-    }
-    if (storedHighScore) {
-        stats.setHighScore(parseInt(storedHighScore));
-    }
-    if (storedMoviesGuessed) {
-        stats.setMoviesGuessed(parseInt(storedMoviesGuessed));
-    }
+    stats.setRoundsPlayed(parseInt(storedRoundsPlayed));
+    stats.setHighScore(parseInt(storedHighScore));
+    stats.setMoviesGuessed(parseInt(storedMoviesGuessed));
 
     if (route.params?.moviesGuessed) {
         let newMoviesGuessed = stats.moviesGuessed + route.params.moviesGuessed;

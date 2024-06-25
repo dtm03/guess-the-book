@@ -15,7 +15,7 @@ export const takeGuess = (gameState, solution, navigation) => {
         gameState.setMoviesGuessed(gameState.moviesGuessed + 1);
         setTimeout(() => {
             resetGame(false, gameState);
-        }, 1500);
+        }, 1000);
         return true;
     } else {
         gameState.setIsGuessCorrect(false);
@@ -25,7 +25,7 @@ export const takeGuess = (gameState, solution, navigation) => {
         setTimeout(() => {
             gameState.setIsGuessCorrect(null);
             if (gameState.remainingNumberOfGuesses <= 1) {
-                navigation.navigate('Start', gameState.score, gameState.moviesGuessed);
+                navigation.navigate('Start', { score: gameState.score, moviesGuessed: gameState.moviesGuessed });
             }
         }, 300);
         return false;
