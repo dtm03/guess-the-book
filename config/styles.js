@@ -81,13 +81,13 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     stat: {
-        fontSize: 20,
-        color: "#FFF",
+        fontSize: 24,
+        color: "#8D7C81",
         fontFamily: 'MulishSemiBold',
     },
     statValue: {
-        fontSize: 20,
-        color: "#FFF",
+        fontSize: 24,
+        color: "#8D7C81",
         fontFamily: 'MulishSemiBold',
     },
     playButton: {
@@ -105,6 +105,11 @@ const styles = StyleSheet.create({
         width: 300,
         height: 300,
         borderRadius: 150,
+    },
+    loadingScreenContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
 

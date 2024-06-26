@@ -1,4 +1,5 @@
 import { Keyboard } from 'react-native';
+import {getMovieAndHints} from "../api";
 
 export const handleNewHint = (hintIndex, setHintIndex, hints) => {
     if (hintIndex < hints.length - 1) {
@@ -6,10 +7,10 @@ export const handleNewHint = (hintIndex, setHintIndex, hints) => {
     }
 };
 
-export const takeGuess = (gameState, solution, navigation) => {
+export const takeGuess = (gameState, navigation) => {
     Keyboard.dismiss();
     let guess = gameState.guess.replace(/[^a-zA-Z0-9]+/g, "").toLowerCase();
-    if (guess === solution) {
+    if (guess === gameState.movieData.movie) {
         gameState.setIsGuessCorrect(true);
         gameState.setScore(gameState.score + 30 - (gameState.hintIndex + 1) * 5);
         gameState.setMoviesGuessed(gameState.moviesGuessed + 1);
@@ -32,7 +33,7 @@ export const takeGuess = (gameState, solution, navigation) => {
     }
 };
 
-export const resetGame = (resetScore, gameState) => {
+export const resetGame = async (resetScore, gameState) => {
     if (resetScore) {
         gameState.setScore(0);
     }
@@ -40,4 +41,10 @@ export const resetGame = (resetScore, gameState) => {
     gameState.setIsGuessCorrect(null);
     gameState.setGuess('');
     gameState.setRemainingNumberOfGuesses(3);
+
+    const data = await getMovieAndHints();
+    if (data) {
+        const { movie, hints } = data;
+        gameState.setMovieData({ movie, hints });
+    }
 };

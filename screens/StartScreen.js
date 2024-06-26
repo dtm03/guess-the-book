@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {View, Text, TouchableOpacity, Image, StatusBar} from 'react-native';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {useNavigation, useIsFocused} from '@react-navigation/native';
 import styles from '../config/styles';
 import GradientBackground from "../components/GradientBackground";
@@ -20,13 +20,12 @@ export default function StartScreen({route}) {
 
     return (
         <View style={styles.startScreenContainer}>
-            {/*<StatusBar barStyle="dark-content" backgroundColor={"#E3DEE0"} />*/}
             <GradientBackground color1="#8D7C81" color2="#E3DEE0"/>
-            <Image source={require('../assets/logos/logo.png')} style={styles.image} />
+            <Image source={require('../assets/logos/sherlockHolmesBnWCloseUp.png')} style={styles.image} />
+            <StatsSection score={stats.score} highScore={stats.highScore} moviesGuessed={stats.moviesGuessed} roundsPlayed={stats.roundsPlayed}/>
             <TouchableOpacity style={styles.playButton} onPress={() => handlePlay(stats, navigation)}>
                 <Text style={styles.playButtonText}>Play</Text>
             </TouchableOpacity>
-            <StatsSection score={stats.score} highScore={stats.highScore} moviesGuessed={stats.moviesGuessed} roundsPlayed={stats.roundsPlayed}/>
         </View>
     );
 }

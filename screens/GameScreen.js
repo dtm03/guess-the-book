@@ -1,25 +1,31 @@
-import React, {useEffect} from 'react';
-import {Text, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
-import {useNavigation, useIsFocused} from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
+import { Text, TouchableOpacity, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 import GradientBackground from "../components/GradientBackground";
 import GuessInput from "../components/GuessInput";
 import styles from '../config/styles';
-import {handleNewHint, takeGuess, resetGame} from '../utils/gameUtils';
-import {useGameState} from '../hooks/useGameState';
+import { handleNewHint, takeGuess, resetGame } from '../utils/gameUtils';
+import { useGameState } from '../hooks/useGameState';
 
 export default function GameScreen() {
     const gameState = useGameState();
     const isFocused = useIsFocused();
     const navigation = useNavigation();
-    const hints = ['The movie features Will Smith', 'The movie also features Margot Robbie'
-        , 'The movie was released in 2015', 'The movie is about a group of thieves', 'The movie is set in Buenos Aires'];
-    const solution = 'focus';
 
     useEffect(() => {
         if (isFocused) {
             resetGame(true, gameState);
         }
     }, [isFocused]);
+
+    if (!gameState.movieData) {
+        return (
+            <KeyboardAvoidingView style={styles.loadingScreenContainer}>
+                <GradientBackground color1="#134074" color2="#7899D4" />
+                <ActivityIndicator size="extra-large" color="#fff" />
+            </KeyboardAvoidingView>
+        );
+    }
 
     return (
         <KeyboardAvoidingView style={styles.gameScreenContainer}>
@@ -29,14 +35,13 @@ export default function GameScreen() {
             />
             <Text style={styles.score}>{gameState.score}</Text>
             <Text style={styles.remainingGuesses}>Remaining Guesses: {gameState.remainingNumberOfGuesses}</Text>
-            <GuessInput guess={gameState.guess} setGuess={gameState.setGuess} takeGuess={() => takeGuess(gameState, solution, navigation)} />
+            <GuessInput guess={gameState.guess} setGuess={gameState.setGuess} takeGuess={() => takeGuess(gameState, navigation)} />
             {hints.slice(0, gameState.hintIndex + 1).map((hint, index) => (
                 <Text key={index} style={styles.hint}>{hint}</Text>
             ))}
-            <TouchableOpacity style={styles.hintButton} onPress={() => handleNewHint(gameState.hintIndex, gameState.setHintIndex, hints)}>
+            <TouchableOpacity style={styles.hintButton} onPress={() => handleNewHint(gameState.hintIndex, gameState.setHintIndex, gameState.movieData.movie)}>
                 <Text style={styles.hintButtonText}>New Hint</Text>
             </TouchableOpacity>
         </KeyboardAvoidingView>
     );
-
 }
