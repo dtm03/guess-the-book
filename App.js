@@ -8,10 +8,6 @@ import { useFonts, Mulish_400Regular, Mulish_600SemiBold, Mulish_700Bold, Mulish
 
 const Stack = createStackNavigator();
 
-// Fix stat updates and write tests
-// Create a logo for the app using stability.ai
-// Implement API calls to fetch movie data
-
 // const resetAsyncStorage = async () => {
 //     try {
 //         await AsyncStorage.clear();

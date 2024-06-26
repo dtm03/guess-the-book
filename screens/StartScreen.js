@@ -21,7 +21,7 @@ export default function StartScreen({route}) {
     return (
         <View style={styles.startScreenContainer}>
             <GradientBackground color1="#8D7C81" color2="#E3DEE0"/>
-            <Image source={require('../assets/logos/sherlockHolmesBnWCloseUp.png')} style={styles.image} />
+            <Image source={require('../assets/sherlockHolmesBnWCloseUp.png')} style={styles.image} />
             <StatsSection score={stats.score} highScore={stats.highScore} moviesGuessed={stats.moviesGuessed} roundsPlayed={stats.roundsPlayed}/>
             <TouchableOpacity style={styles.playButton} onPress={() => handlePlay(stats, navigation)}>
                 <Text style={styles.playButtonText}>Play</Text>
