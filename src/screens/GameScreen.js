@@ -1,57 +1,131 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
 import GradientBackground from "../components/GradientBackground";
 import GuessInput from "../components/GuessInput";
-import { handleNewHint, takeGuess, resetGame } from '../utils/gameUtils';
-import { useGameState } from '../hooks/useGameState';
-import { 
-    Container, 
-    Score, 
-    RemainingGuesses, 
-    Hint, 
-    Button, 
-    LoadingContainer, 
-    LoadingSpinner 
-} from '../styles/GlobalStyles';
+import {
+  handleNewHint,
+  takeGuess,
+  resetGame,
+  skipMovie,
+} from "../utils/gameUtils";
+import { useGameState } from "../hooks/useGameState";
+import {
+  Container,
+  Title,
+  Score,
+  RemainingGuesses,
+  MovieReveal,
+  Hint,
+  Button,
+  LoadingContainer,
+  LoadingSpinner,
+  StatsBar,
+  StatItem,
+  StatLabel,
+  StatValue,
+  ButtonGroup,
+  SkipButton,
+} from "../styles/GlobalStyles";
 
 export default function GameScreen() {
-    const gameState = useGameState();
-    const navigate = useNavigate();
+  const gameState = useGameState();
 
-    useEffect(() => {
-        resetGame(true, gameState);
-    }, []);
+  useEffect(() => {
+    resetGame(true, gameState);
+  }, []);
 
-    if (!gameState.movieData) {
-        return (
-            <LoadingContainer>
-                <GradientBackground color1="#134074" color2="#7899D4" />
-                <LoadingSpinner />
-            </LoadingContainer>
-        );
-    }
-
+  if (!gameState.movieData) {
     return (
-        <Container>
-            <GradientBackground
-                color1={gameState.isGuessCorrect === null ? "#134074" : gameState.isGuessCorrect ? "#C3D350" : "#C52233"}
-                color2={gameState.isGuessCorrect === null ? "#7899D4" : gameState.isGuessCorrect ? "#52AA5E" : "#FF8833"}
-            />
-            <Score>{gameState.score}</Score>
-            <RemainingGuesses>Remaining Guesses: {gameState.remainingNumberOfGuesses}</RemainingGuesses>
-            <GuessInput 
-                guess={gameState.guess} 
-                setGuess={gameState.setGuess} 
-                takeGuess={() => takeGuess(gameState, navigate)} 
-            />
-            {gameState.movieData.hints && gameState.movieData.hints.slice(0, gameState.hintIndex + 1).map((hint, index) => (
-                <Hint key={index}>{hint}</Hint>
-            ))}
-            <Button 
-                onClick={() => handleNewHint(gameState.hintIndex, gameState.setHintIndex, gameState.movieData.hints)}
-            >
-                New Hint
-            </Button>
-        </Container>
+      <LoadingContainer>
+        <GradientBackground color1="#134074" color2="#7899D4" />
+        <LoadingSpinner />
+      </LoadingContainer>
     );
+  }
+
+  const maxHints = gameState.movieData.hints
+    ? gameState.movieData.hints.length
+    : 5;
+  const allHintsShown = gameState.hintIndex >= maxHints - 1;
+  const isLastGuess =
+    gameState.remainingNumberOfGuesses === 0 &&
+    gameState.isGuessCorrect === false;
+
+  return (
+    <Container>
+      <GradientBackground
+        color1={
+          gameState.isGuessCorrect === null
+            ? "#134074"
+            : gameState.isGuessCorrect
+            ? "#C3D350"
+            : "#C52233"
+        }
+        color2={
+          gameState.isGuessCorrect === null
+            ? "#7899D4"
+            : gameState.isGuessCorrect
+            ? "#52AA5E"
+            : "#FF8833"
+        }
+      />
+
+      {/* Stats Bar */}
+      <StatsBar>
+        <StatItem>
+          <StatLabel>Movies Guessed</StatLabel>
+          <StatValue>{gameState.moviesGuessed}</StatValue>
+        </StatItem>
+        <StatItem>
+          <StatLabel>Rounds Played</StatLabel>
+          <StatValue>{gameState.roundsPlayed}</StatValue>
+        </StatItem>
+        <StatItem>
+          <StatLabel>High Score</StatLabel>
+          <StatValue>{gameState.highScore}</StatValue>
+        </StatItem>
+      </StatsBar>
+
+      <Title>AI Movie Guesser</Title>
+      <Score>{gameState.score}</Score>
+
+      {/* Show movie title on last failed guess, otherwise show remaining guesses */}
+      {isLastGuess ? (
+        <MovieReveal>
+          You should have guessed: {gameState.movieData.movie}
+        </MovieReveal>
+      ) : (
+        <RemainingGuesses>
+          Remaining Guesses: {gameState.remainingNumberOfGuesses}
+        </RemainingGuesses>
+      )}
+
+      <GuessInput
+        guess={gameState.guess}
+        setGuess={gameState.setGuess}
+        takeGuess={() => takeGuess(gameState)}
+      />
+
+      {gameState.movieData.hints &&
+        gameState.movieData.hints
+          .slice(0, gameState.hintIndex + 1)
+          .map((hint, index) => <Hint key={index}>{hint}</Hint>)}
+
+      <ButtonGroup>
+        {!allHintsShown && (
+          <Button
+            onClick={() =>
+              handleNewHint(
+                gameState.hintIndex,
+                gameState.setHintIndex,
+                gameState.movieData.hints
+              )
+            }
+          >
+            New Hint
+          </Button>
+        )}
+        <SkipButton onClick={() => skipMovie(gameState)}>Skip Movie</SkipButton>
+      </ButtonGroup>
+    </Container>
+  );
 }
