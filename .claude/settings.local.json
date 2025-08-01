@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(copy:*)",
+      "Bash(cp:*)",
+      "Bash(npm install)",
+      "Bash(rm:*)"
+    ],
+    "deny": []
+  }
+}

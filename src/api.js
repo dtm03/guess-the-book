@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // API Key should be put in a .env file
-const API_KEY = 'YOUR_OPENAI_API_KEY';
+const API_KEY = process.env.REACT_APP_OPENAI_API_KEY || 'YOUR_OPENAI_API_KEY';
 
 export const getMovieAndHints = async () => {
     try {

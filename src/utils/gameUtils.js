@@ -1,5 +1,4 @@
-import { Keyboard } from 'react-native';
-import {getMovieAndHints} from "../api";
+import { getMovieAndHints } from "../api";
 
 export const handleNewHint = (hintIndex, setHintIndex, hints) => {
     if (hintIndex < hints.length - 1) {
@@ -7,13 +6,12 @@ export const handleNewHint = (hintIndex, setHintIndex, hints) => {
     }
 };
 
-export const takeGuess = (gameState, navigation) => {
-    Keyboard.dismiss();
+export const takeGuess = (gameState, navigate) => {
     let guess = gameState.guess.replace(/[^a-zA-Z0-9]+/g, "").toLowerCase();
-    if (guess === gameState.movieData.movie) {
+    let movieTitle = gameState.movieData.movie.replace(/[^a-zA-Z0-9]+/g, "").toLowerCase();
+    if (guess === movieTitle) {
         gameState.setIsGuessCorrect(true);
         gameState.setScore(gameState.score + 30 - (gameState.hintIndex + 1) * 5);
-        gameState.setMoviesGuessed(gameState.moviesGuessed + 1);
         setTimeout(() => {
             resetGame(false, gameState);
         }, 1000);
@@ -26,7 +24,11 @@ export const takeGuess = (gameState, navigation) => {
         setTimeout(() => {
             gameState.setIsGuessCorrect(null);
             if (gameState.remainingNumberOfGuesses <= 1) {
-                navigation.navigate('Start', { score: gameState.score, moviesGuessed: gameState.moviesGuessed });
+                navigate('/', { 
+                    state: { 
+                        score: gameState.score
+                    } 
+                });
             }
         }, 300);
         return false;
