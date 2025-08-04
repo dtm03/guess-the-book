@@ -75,17 +75,25 @@ export default function GameScreen() {
           <StatLabel>Movies Guessed</StatLabel>
           <StatValue>{gameState.moviesGuessed}</StatValue>
         </StatItem>
+        <StatItem className="title-with-icon">
+          <img
+            src={require("../assets/sherlock.png")}
+            alt="Sherlock"
+            style={{
+              width: 80,
+              height: 80,
+              marginRight: 12,
+              borderRadius: 40,
+            }}
+          />
+          <Title>Guess the movie</Title>
+        </StatItem>
         <StatItem>
           <StatLabel>Rounds Played</StatLabel>
           <StatValue>{gameState.roundsPlayed}</StatValue>
         </StatItem>
-        <StatItem>
-          <StatLabel>High Score</StatLabel>
-          <StatValue>{gameState.highScore}</StatValue>
-        </StatItem>
       </StatsBar>
 
-      <Title>AI Movie Guesser</Title>
       <Score>{gameState.score}</Score>
 
       {/* Show movie title on last failed guess, otherwise show remaining guesses */}
@@ -124,7 +132,7 @@ export default function GameScreen() {
             New Hint
           </Button>
         )}
-        <SkipButton onClick={() => skipMovie(gameState)}>Skip Movie</SkipButton>
+        <Button onClick={() => skipMovie(gameState)}>Skip Movie</Button>
       </ButtonGroup>
     </Container>
   );

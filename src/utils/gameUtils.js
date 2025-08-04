@@ -13,11 +13,8 @@ export const takeGuess = (gameState) => {
     const newScore = gameState.score + 30 - (gameState.hintIndex + 1) * 5;
     gameState.setScore(newScore);
 
-    // Update stats
-    gameState.updateMoviesGuessed(gameState.moviesGuessed + 1);
-    if (newScore > gameState.highScore) {
-      gameState.updateHighScore(newScore);
-    }
+    gameState.setMoviesGuessed(gameState.moviesGuessed + 1);
+    gameState.setRoundsPlayed(gameState.roundsPlayed + 1);
 
     setTimeout(() => {
       resetGame(false, gameState);
@@ -32,16 +29,12 @@ export const takeGuess = (gameState) => {
     }
     setTimeout(() => {
       if (gameState.remainingNumberOfGuesses <= 1) {
-        // Round over - show movie title for longer on red screen
-        gameState.updateRoundsPlayed(gameState.roundsPlayed + 1);
-        if (gameState.score > gameState.highScore) {
-          gameState.updateHighScore(gameState.score);
-        }
+        gameState.setRoundsPlayed(gameState.roundsPlayed + 1);
         setTimeout(() => {
           gameState.setIsGuessCorrect(null);
           gameState.setScore(0);
           resetGame(true, gameState);
-        }, 3000); // Longer delay to show movie title
+        }, 3000);
       } else {
         gameState.setIsGuessCorrect(null);
       }
@@ -51,11 +44,7 @@ export const takeGuess = (gameState) => {
 };
 
 export const skipMovie = (gameState) => {
-  // Update rounds played and reset game
-  gameState.updateRoundsPlayed(gameState.roundsPlayed + 1);
-  if (gameState.score > gameState.highScore) {
-    gameState.updateHighScore(gameState.score);
-  }
+  gameState.setRoundsPlayed(gameState.roundsPlayed + 1);
   gameState.setScore(0);
   resetGame(true, gameState);
 };

@@ -10,36 +10,34 @@ export const Container = styled.div`
   overflow: hidden;
 `;
 
-export const Title = styled.h1`
+export const Title = styled.div`
   font-size: 64px;
   font-weight: 800;
-  margin-top: 100px;
   color: #fff;
   font-family: "Mulish", sans-serif;
   text-align: center;
-  margin-bottom: 20px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
 export const Score = styled.h1`
-  font-size: 80px;
+  font-size: 64px;
   font-weight: 800;
   color: #d5d0cd;
   font-family: "Mulish", sans-serif;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 200px;
+  margin-bottom: 8px;
 `;
 
 export const RemainingGuesses = styled.p`
-  font-size: 16px;
+  font-size: 12px;
   color: #d5d0cd;
   font-family: "Mulish", sans-serif;
   font-weight: 400;
 `;
 
 export const MovieReveal = styled.p`
-  margin-top: 20px;
-  font-size: 24px;
+  margin-top: 16px;
+  font-size: 20px;
   color: #fff;
   font-family: "Mulish", sans-serif;
   font-weight: 700;
@@ -48,13 +46,12 @@ export const MovieReveal = styled.p`
 `;
 
 export const Hint = styled.p`
-  font-size: 20px;
-  margin-top: 30px;
+  font-size: 16px;
+  margin-top: 24px;
   color: #fff;
   font-family: "Mulish", sans-serif;
   text-align: center;
   padding: 0 20px;
-  max-width: 600px;
 `;
 
 export const Button = styled.button`
@@ -86,7 +83,7 @@ export const GuessInputContainer = styled.div`
   padding: 5px 5px 5px 24px;
   border-radius: 40px;
   background-color: #fff;
-  margin: 40px 12px 10px 12px;
+  margin: 40px 12px 64px 12px;
   width: 90%;
   max-width: 400px;
 `;
@@ -137,8 +134,8 @@ export const StatsBar = styled.div`
   align-items: center;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  border-radius: 15px;
-  padding: 10px 20px;
+  border-radius: 64px;
+  padding: 10px 64px;
   color: #fff;
   font-family: "Mulish", sans-serif;
   font-weight: 600;
@@ -151,6 +148,12 @@ export const StatItem = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 2px;
+
+  &.title-with-icon {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
 `;
 
 export const StatLabel = styled.span`
