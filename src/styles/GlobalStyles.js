@@ -78,35 +78,7 @@ export const Hint = styled.p`
   }
 `;
 
-export const Button = styled.button`
-  background-color: ${(props) => props.bgColor || "#7899D4"};
-  color: #fff;
-  border: none;
-  border-radius: ${(props) => props.borderRadius || "40px"};
-  padding: ${(props) => props.padding || "15px 25px"};
-  font-size: ${(props) => props.fontSize || "18px"};
-  font-family: "Mulish", sans-serif;
-  font-weight: 800;
-  cursor: pointer;
-  margin-top: ${(props) => props.marginTop || "40px"};
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    opacity: 0.9;
-  }
-
-  &:active {
-    transform: scale(0.98);
-  }
-
-  @media (max-width: 480px) {
-    padding: 10px 16px;
-    font-size: 14px;
-    margin-top: 25px;
-    min-width: 100px;
-  }
-`;
-
+// Updated GuessInputContainer
 export const GuessInputContainer = styled.div`
   display: flex;
   align-items: center;
@@ -123,15 +95,49 @@ export const GuessInputContainer = styled.div`
     padding: 5px 10px 5px 16px;
     width: 80%;
     max-width: 280px;
-    height: 40px;
+    min-height: 40px; /* Changed from fixed height */
+    align-items: stretch; /* Ensure both elements take full height */
   }
 `;
 
+// Updated Button with box-sizing and better mobile handling
+export const Button = styled.button`
+  background-color: ${(props) => props.bgColor || "#7899D4"};
+  color: #fff;
+  border: none;
+  border-radius: ${(props) => props.borderRadius || "40px"};
+  padding: ${(props) => props.padding || "15px 25px"};
+  font-size: ${(props) => props.fontSize || "18px"};
+  font-family: "Mulish", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: ${(props) => props.marginTop || "40px"};
+  transition: background-color 0.3s ease;
+  box-sizing: border-box; /* Added this */
+  flex-shrink: 0; /* Prevent button from shrinking */
+  align-self: center; /* Explicit alignment */
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px 20px 10px 20px; /* Slightly reduced to fit better */
+    font-size: 14px;
+    min-width: 60px; /* Reduced from 100px */
+  }
+`;
+
+// Updated GuessInput with better mobile handling
 export const GuessInput = styled.input`
   flex: 1;
   font-size: 16px;
   color: #738296;
-  font-family: "Mulish", sans-serif;
+  font-family: "Mulish", -apple-system, BlinkMacSystemFont, sans-serif;
   border: none;
   outline: none;
   background: transparent;
@@ -144,8 +150,9 @@ export const GuessInput = styled.input`
   }
 
   @media (max-width: 480px) {
+    margin-top: 2px;
     font-size: 15px;
-    line-height: 30px;
+    line-height: 32px;
   }
 `;
 
