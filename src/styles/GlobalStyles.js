@@ -17,6 +17,15 @@ export const Title = styled.div`
   font-family: "Mulish", sans-serif;
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 768px) {
+    font-size: 32px;
+    line-height: 1.2;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 24px;
+  }
 `;
 
 export const Score = styled.h1`
@@ -26,6 +35,16 @@ export const Score = styled.h1`
   font-family: "Mulish", sans-serif;
   margin-top: 200px;
   margin-bottom: 8px;
+
+  @media (max-width: 768px) {
+    font-size: 48px;
+    margin-top: 120px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 36px;
+    margin-top: 100px;
+  }
 `;
 
 export const RemainingGuesses = styled.p`
@@ -33,6 +52,10 @@ export const RemainingGuesses = styled.p`
   color: #d5d0cd;
   font-family: "Mulish", sans-serif;
   font-weight: 400;
+
+  @media (max-width: 480px) {
+    font-size: 11px;
+  }
 `;
 
 export const MovieReveal = styled.p`
@@ -43,6 +66,16 @@ export const MovieReveal = styled.p`
   font-weight: 700;
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+    padding: 0 20px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 16px;
+    margin-top: 12px;
+  }
 `;
 
 export const Hint = styled.p`
@@ -52,6 +85,18 @@ export const Hint = styled.p`
   font-family: "Mulish", sans-serif;
   text-align: center;
   padding: 0 20px;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+    margin-top: 20px;
+    padding: 0 30px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+    margin-top: 16px;
+    padding: 0 25px;
+  }
 `;
 
 export const Button = styled.button`
@@ -74,6 +119,19 @@ export const Button = styled.button`
   &:active {
     transform: scale(0.98);
   }
+
+  @media (max-width: 768px) {
+    padding: 12px 20px;
+    font-size: 16px;
+    margin-top: 30px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px 16px;
+    font-size: 14px;
+    margin-top: 25px;
+    min-width: 100px;
+  }
 `;
 
 export const GuessInputContainer = styled.div`
@@ -86,6 +144,21 @@ export const GuessInputContainer = styled.div`
   margin: 40px 12px 64px 12px;
   width: 90%;
   max-width: 400px;
+
+  @media (max-width: 768px) {
+    margin: 30px 20px 50px 20px;
+    padding: 5px 5px 5px 20px;
+    width: 70%;
+    max-width: 320px;
+  }
+
+  @media (max-width: 480px) {
+    margin: 25px 20px 20px 20px;
+    padding: 5px 10px 5px 16px;
+    width: 80%;
+    max-width: 280px;
+    height: 40px;
+  }
 `;
 
 export const GuessInput = styled.input`
@@ -96,9 +169,17 @@ export const GuessInput = styled.input`
   border: none;
   outline: none;
   background: transparent;
+  height: 36px;
+  line-height: 36px;
+  box-sizing: border-box;
 
   &::placeholder {
     color: #d5d0cd;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 15px;
+    line-height: 30px;
   }
 `;
 
@@ -122,6 +203,12 @@ export const LoadingSpinner = styled.div`
       transform: rotate(360deg);
     }
   }
+
+  @media (max-width: 480px) {
+    width: 40px;
+    height: 40px;
+    border-width: 2px;
+  }
 `;
 
 export const StatsBar = styled.div`
@@ -141,6 +228,23 @@ export const StatsBar = styled.div`
   font-weight: 600;
   font-size: 14px;
   z-index: 10;
+
+  @media (max-width: 768px) {
+    padding: 8px 32px;
+    font-size: 13px;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 6px 30px;
+    font-size: 11px;
+    border-radius: 36px;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+  }
 `;
 
 export const StatItem = styled.div`
@@ -148,34 +252,108 @@ export const StatItem = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 2px;
+  text-align: center;
 
   &.title-with-icon {
     flex-direction: row;
     align-items: center;
     gap: 12px;
+
+    @media (max-width: 768px) {
+      gap: 8px;
+    }
+
+    @media (max-width: 480px) {
+      gap: 6px;
+    }
+
+    img {
+      @media (max-width: 768px) {
+        width: 60px !important;
+        height: 60px !important;
+        margin-right: 8px !important;
+      }
+
+      @media (max-width: 480px) {
+        width: 40px !important;
+        height: 40px !important;
+        margin-right: 4px !important;
+        border-radius: 20px !important;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    gap: 1px;
+    min-width: 60px;
   }
 `;
 
 export const StatLabel = styled.span`
   font-size: 12px;
   opacity: 0.8;
+  text-align: center;
+  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
+  }
 `;
 
 export const StatValue = styled.span`
   font-size: 16px;
   font-weight: 800;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
+`;
+
+export const StyledAvatar = styled.img`
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: block;
+  object-fit: cover;
+
+  @media (max-width: 768px) {
+    width: 60px;
+    height: 60px;
+  }
+
+  @media (max-width: 480px) {
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 export const ButtonGroup = styled.div`
   display: flex;
   gap: 15px;
   margin-top: 20px;
-`;
 
-export const SkipButton = styled(Button)`
-  background-color: #666;
+  @media (max-width: 768px) {
+    gap: 12px;
+    margin-top: 15px;
+  }
 
-  &:hover {
-    background-color: #555;
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 10px;
+    max-width: 200px;
+    margin-top: 15px;
+
+    button {
+      margin-top: 0 !important;
+    }
   }
 `;

@@ -24,6 +24,7 @@ import {
   StatValue,
   ButtonGroup,
   SkipButton,
+  StyledAvatar,
 } from "../styles/GlobalStyles";
 
 export default function GameScreen() {
@@ -75,18 +76,11 @@ export default function GameScreen() {
           <StatLabel>Movies Guessed</StatLabel>
           <StatValue>{gameState.moviesGuessed}</StatValue>
         </StatItem>
-        <StatItem className="title-with-icon">
-          <img
+        <StatItem>
+          <StyledAvatar
             src={require("../assets/sherlock.png")}
             alt="Sherlock"
-            style={{
-              width: 80,
-              height: 80,
-              marginRight: 12,
-              borderRadius: 40,
-            }}
           />
-          <Title>Guess the movie</Title>
         </StatItem>
         <StatItem>
           <StatLabel>Rounds Played</StatLabel>
