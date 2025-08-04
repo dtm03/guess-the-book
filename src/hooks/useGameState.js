@@ -6,10 +6,10 @@ export const useGameState = () => {
   const [isGuessCorrect, setIsGuessCorrect] = useState(null);
   const [guess, setGuess] = useState("");
   const [hintIndex, setHintIndex] = useState(0);
-  const [movieData, setMovieData] = useState(null);
+  const [bookData, setBookData] = useState(null);
 
   const [roundsPlayed, setRoundsPlayed] = useState(0);
-  const [moviesGuessed, setMoviesGuessed] = useState(0);
+  const [booksGuessed, setBooksGuessed] = useState(0);
 
   return {
     score,
@@ -22,11 +22,11 @@ export const useGameState = () => {
     setGuess,
     hintIndex,
     setHintIndex,
-    movieData,
-    setMovieData,
+    bookData,
+    setBookData,
     roundsPlayed,
     setRoundsPlayed,
-    moviesGuessed,
-    setMoviesGuessed,
+    booksGuessed,
+    setBooksGuessed,
   };
 };

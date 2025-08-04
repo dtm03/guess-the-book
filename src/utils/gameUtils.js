@@ -1,4 +1,4 @@
-import { getMovieAndHints } from "../api";
+import { getBookAndHints } from "../api";
 import { titlesMatch } from "./stringUtils";
 
 export const handleNewHint = (hintIndex, setHintIndex, hints) => {
@@ -8,12 +8,12 @@ export const handleNewHint = (hintIndex, setHintIndex, hints) => {
 };
 
 export const takeGuess = (gameState) => {
-  if (titlesMatch(gameState.guess, gameState.movieData.movie)) {
+  if (titlesMatch(gameState.guess, gameState.bookData.book)) {
     gameState.setIsGuessCorrect(true);
     const newScore = gameState.score + 30 - (gameState.hintIndex + 1) * 5;
     gameState.setScore(newScore);
 
-    gameState.setMoviesGuessed(gameState.moviesGuessed + 1);
+    gameState.setBooksGuessed(gameState.booksGuessed + 1);
     gameState.setRoundsPlayed(gameState.roundsPlayed + 1);
 
     setTimeout(() => {
@@ -43,7 +43,7 @@ export const takeGuess = (gameState) => {
   }
 };
 
-export const skipMovie = (gameState) => {
+export const skipBook = (gameState) => {
   gameState.setRoundsPlayed(gameState.roundsPlayed + 1);
   gameState.setScore(0);
   resetGame(true, gameState);
@@ -58,9 +58,9 @@ export const resetGame = async (resetScore, gameState) => {
   gameState.setGuess("");
   gameState.setRemainingNumberOfGuesses(3);
 
-  const data = await getMovieAndHints();
+  const data = await getBookAndHints();
   if (data) {
-    const { movie, hints } = data;
-    gameState.setMovieData({ movie, hints });
+    const { book, hints } = data;
+    gameState.setBookData({ book, hints });
   }
 };

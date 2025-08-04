@@ -48,7 +48,7 @@ export const RemainingGuesses = styled.p`
   }
 `;
 
-export const MovieReveal = styled.p`
+export const BookReveal = styled.p`
   margin-top: 16px;
   font-size: 20px;
   color: #fff;

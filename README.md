@@ -1,28 +1,31 @@
-# Guess the Movie - React Web App
+# Guess the Book - React Web App
 
-A movie guessing game converted from React Native to React web application.
+A book guessing game converted from React Native to React web application.
 
 ## Features
 
-- Interactive movie guessing game with hints
+- Interactive book guessing game with hints
 - Score tracking and statistics
 - Local storage for persistent data
 - Responsive design with gradient backgrounds
-- Integration with OpenAI API for movie generation
+- Integration with OpenAI API for book generation
 
 ## Setup
 
 1. Install dependencies:
+
    ```bash
    npm install
    ```
 
 2. Create a `.env` file based on `.env.example`:
+
    ```bash
    cp .env.example .env
    ```
 
 3. Add your OpenAI API key to the `.env` file:
+
    ```
    REACT_APP_OPENAI_API_KEY=your_actual_api_key_here
    ```
@@ -53,8 +56,8 @@ This application was converted from React Native to React web app with the follo
 
 ## Game Rules
 
-- Guess the movie based on hints
+- Guess the book based on hints
 - Start with the most challenging hint, get easier hints as you progress
 - Score: 30 points minus 5 points per hint used
-- You have 3 guesses per movie
+- You have 3 guesses per book
 - Stats are saved locally in your browser

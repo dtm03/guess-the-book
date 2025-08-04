@@ -28,20 +28,20 @@ const makeGeminiRequest = async (requestBody) => {
   }
 };
 
-// Movie queue to avoid repeats
-let movieQueue = [];
-let usedMovies = new Set();
+// Book queue to avoid repeats
+let bookQueue = [];
+let usedBooks = new Set();
 
-export const getMultipleMovies = async () => {
+export const getMultipleBooks = async () => {
   try {
     const response = await makeGeminiRequest({
       contents: [
         {
           parts: [
             {
-              text: `Generate 8 different popular movie titles with 5 hints each. Make sure they are all different movies from various genres and decades. 
-Format it as follows for each movie:
-Movie: [Movie Title]
+              text: `Generate 8 different popular book titles with 5 hints each. Make sure they are all different books from various genres and decades. 
+Format it as follows for each book:
+Book: [Book Title]
 Hint 1: [Challenging hint]
 Hint 2: [Moderately challenging hint]
 Hint 3: [Moderate hint]
@@ -50,7 +50,7 @@ Hint 5: [Easiest hint]
 
 ---
 
-Repeat this format for all 8 movies. Make sure to include the --- separator between movies.`,
+Repeat this format for all 8 books. Make sure to include the --- separator between books.`,
             },
           ],
         },
@@ -62,73 +62,73 @@ Repeat this format for all 8 movies. Make sure to include the --- separator betw
     });
 
     const result = response.data.candidates[0].content.parts[0].text.trim();
-    const movieBlocks = result
+    const bookBlocks = result
       .split("---")
       .map((block) => block.trim())
       .filter((block) => block.length > 0);
 
-    const movies = movieBlocks
+    const books = bookBlocks
       .map((block) => {
         const lines = block
           .split("\n")
           .map((line) => line.trim())
           .filter((line) => line.length > 0);
-        const movie = lines[0].replace("Movie: ", "");
+        const book = lines[0].replace("Book: ", "");
         const hints = lines
           .slice(1)
           .map((line) => line.replace(/Hint \d+: /, ""));
-        return { movie, hints };
+        return { book, hints };
       })
-      .filter((movie) => movie.movie && movie.hints.length >= 5);
+      .filter((book) => book.book && book.hints.length >= 5);
 
-    return movies;
+    return books;
   } catch (error) {
-    console.error("Error fetching multiple movies:", error);
+    console.error("Error fetching multiple books:", error);
     return [];
   }
 };
 
-export const getMovieAndHints = async () => {
-  // If queue is empty or low, fetch new movies
-  if (movieQueue.length <= 2) {
-    console.log("Fetching new movies...");
-    const newMovies = await getMultipleMovies();
+export const getBookAndHints = async () => {
+  // If queue is empty or low, fetch new books
+  if (bookQueue.length <= 2) {
+    console.log("Fetching new books...");
+    const newBooks = await getMultipleBooks();
 
-    // Filter out already used movies
-    const unusedMovies = newMovies.filter((movie) => {
-      const normalizedTitle = normalizeTitle(movie.movie);
-      return !usedMovies.has(normalizedTitle);
+    // Filter out already used books
+    const unusedBooks = newBooks.filter((book) => {
+      const normalizedTitle = normalizeTitle(book.book);
+      return !usedBooks.has(normalizedTitle);
     });
 
-    movieQueue.push(...unusedMovies);
-    console.log(`Added ${unusedMovies.length} new movies to queue`);
+    bookQueue.push(...unusedBooks);
+    console.log(`Added ${unusedBooks.length} new books to queue`);
   }
 
-  // Get next movie from queue
-  if (movieQueue.length > 0) {
-    const movie = movieQueue.shift();
-    const normalizedTitle = normalizeTitle(movie.movie);
-    usedMovies.add(normalizedTitle);
+  // Get next book from queue
+  if (bookQueue.length > 0) {
+    const book = bookQueue.shift();
+    const normalizedTitle = normalizeTitle(book.book);
+    usedBooks.add(normalizedTitle);
 
-    // Clear used movies if we've used too many (reset after 50 movies)
-    if (usedMovies.size > 50) {
-      usedMovies.clear();
-      console.log("Cleared used movies cache");
+    // Clear used books if we've used too many (reset after 50 books)
+    if (usedBooks.size > 50) {
+      usedBooks.clear();
+      console.log("Cleared used books cache");
     }
 
-    return movie;
+    return book;
   }
 
-  // Fallback: fetch single movie if queue system fails
+  // Fallback: fetch single book if queue system fails
   try {
     const response = await makeGeminiRequest({
       contents: [
         {
           parts: [
             {
-              text: `Give me a movie title of a rather popular movie and five hints to help someone guess the movie. 
+              text: `Give me a book title of a rather popular book and five hints to help someone guess the book. 
 Format it as follows:
-Movie: [Movie Title]
+Book: [Book Title]
 Hint 1: [Challenging hint]
 Hint 2: [Moderately challenging hint]
 Hint 3: [Moderate hint]
@@ -151,12 +151,12 @@ Make sure to follow this exact format with proper line breaks.`,
       .split("\n")
       .map((line) => line.trim())
       .filter((line) => line.length > 0);
-    const movie = lines[0].replace("Movie: ", "");
+    const book = lines[0].replace("Book: ", "");
     const hints = lines.slice(1).map((line) => line.replace(/Hint \d+: /, ""));
 
-    return { movie, hints };
+    return { book, hints };
   } catch (error) {
-    console.error("Error fetching movie and hints:", error);
+    console.error("Error fetching book and hints:", error);
     return null;
   }
 };

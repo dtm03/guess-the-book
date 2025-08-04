@@ -5,7 +5,7 @@ import {
   handleNewHint,
   takeGuess,
   resetGame,
-  skipMovie,
+  skipBook,
 } from "../utils/gameUtils";
 import { useGameState } from "../hooks/useGameState";
 import {
@@ -13,7 +13,7 @@ import {
   Title,
   Score,
   RemainingGuesses,
-  MovieReveal,
+  BookReveal,
   Hint,
   Button,
   LoadingContainer,
@@ -34,7 +34,7 @@ export default function GameScreen() {
     resetGame(true, gameState);
   }, []);
 
-  if (!gameState.movieData) {
+  if (!gameState.bookData) {
     return (
       <LoadingContainer>
         <GradientBackground color1="#134074" color2="#7899D4" />
@@ -43,8 +43,8 @@ export default function GameScreen() {
     );
   }
 
-  const maxHints = gameState.movieData.hints
-    ? gameState.movieData.hints.length
+  const maxHints = gameState.bookData.hints
+    ? gameState.bookData.hints.length
     : 5;
   const allHintsShown = gameState.hintIndex >= maxHints - 1;
   const isLastGuess =
@@ -73,8 +73,8 @@ export default function GameScreen() {
       {/* Stats Bar */}
       <StatsBar>
         <StatItem>
-          <StatLabel>Movies Guessed</StatLabel>
-          <StatValue>{gameState.moviesGuessed}</StatValue>
+          <StatLabel>Books Guessed</StatLabel>
+          <StatValue>{gameState.booksGuessed}</StatValue>
         </StatItem>
         <StatItem>
           <StyledAvatar
@@ -90,11 +90,11 @@ export default function GameScreen() {
 
       <Score>{gameState.score}</Score>
 
-      {/* Show movie title on last failed guess, otherwise show remaining guesses */}
+      {/* Show book title on last failed guess, otherwise show remaining guesses */}
       {isLastGuess ? (
-        <MovieReveal>
-          You should have guessed: {gameState.movieData.movie}
-        </MovieReveal>
+        <BookReveal>
+          You should have guessed: {gameState.bookData.book}
+        </BookReveal>
       ) : (
         <RemainingGuesses>
           Remaining Guesses: {gameState.remainingNumberOfGuesses}
@@ -107,8 +107,8 @@ export default function GameScreen() {
         takeGuess={() => takeGuess(gameState)}
       />
 
-      {gameState.movieData.hints &&
-        gameState.movieData.hints
+      {gameState.bookData.hints &&
+        gameState.bookData.hints
           .slice(0, gameState.hintIndex + 1)
           .map((hint, index) => <Hint key={index}>{hint}</Hint>)}
 
@@ -119,14 +119,14 @@ export default function GameScreen() {
               handleNewHint(
                 gameState.hintIndex,
                 gameState.setHintIndex,
-                gameState.movieData.hints
+                gameState.bookData.hints
               )
             }
           >
             New Hint
           </Button>
         )}
-        <Button onClick={() => skipMovie(gameState)}>Skip Movie</Button>
+        <Button onClick={() => skipBook(gameState)}>Skip Book</Button>
       </ButtonGroup>
     </Container>
   );
