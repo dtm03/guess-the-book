@@ -18,11 +18,6 @@ export const Title = styled.div`
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 
-  @media (max-width: 768px) {
-    font-size: 32px;
-    line-height: 1.2;
-  }
-
   @media (max-width: 480px) {
     font-size: 24px;
   }
@@ -35,11 +30,6 @@ export const Score = styled.h1`
   font-family: "Mulish", sans-serif;
   margin-top: 200px;
   margin-bottom: 8px;
-
-  @media (max-width: 768px) {
-    font-size: 48px;
-    margin-top: 120px;
-  }
 
   @media (max-width: 480px) {
     font-size: 36px;
@@ -67,11 +57,6 @@ export const MovieReveal = styled.p`
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
-  @media (max-width: 768px) {
-    font-size: 18px;
-    padding: 0 20px;
-  }
-
   @media (max-width: 480px) {
     font-size: 16px;
     margin-top: 12px;
@@ -85,12 +70,6 @@ export const Hint = styled.p`
   font-family: "Mulish", sans-serif;
   text-align: center;
   padding: 0 20px;
-
-  @media (max-width: 768px) {
-    font-size: 15px;
-    margin-top: 20px;
-    padding: 0 30px;
-  }
 
   @media (max-width: 480px) {
     font-size: 14px;
@@ -120,12 +99,6 @@ export const Button = styled.button`
     transform: scale(0.98);
   }
 
-  @media (max-width: 768px) {
-    padding: 12px 20px;
-    font-size: 16px;
-    margin-top: 30px;
-  }
-
   @media (max-width: 480px) {
     padding: 10px 16px;
     font-size: 14px;
@@ -144,13 +117,6 @@ export const GuessInputContainer = styled.div`
   margin: 40px 12px 64px 12px;
   width: 90%;
   max-width: 400px;
-
-  @media (max-width: 768px) {
-    margin: 30px 20px 50px 20px;
-    padding: 5px 5px 5px 20px;
-    width: 70%;
-    max-width: 320px;
-  }
 
   @media (max-width: 480px) {
     margin: 25px 20px 20px 20px;
@@ -229,14 +195,6 @@ export const StatsBar = styled.div`
   font-size: 14px;
   z-index: 10;
 
-  @media (max-width: 768px) {
-    padding: 8px 32px;
-    font-size: 13px;
-    top: 15px;
-    left: 15px;
-    right: 15px;
-  }
-
   @media (max-width: 480px) {
     padding: 6px 30px;
     font-size: 11px;
@@ -258,10 +216,6 @@ export const StatItem = styled.div`
     flex-direction: row;
     align-items: center;
     gap: 12px;
-
-    @media (max-width: 768px) {
-      gap: 8px;
-    }
 
     @media (max-width: 480px) {
       gap: 6px;
@@ -295,10 +249,6 @@ export const StatLabel = styled.span`
   text-align: center;
   white-space: nowrap;
 
-  @media (max-width: 768px) {
-    font-size: 11px;
-  }
-
   @media (max-width: 480px) {
     font-size: 12px;
   }
@@ -308,10 +258,6 @@ export const StatValue = styled.span`
   font-size: 16px;
   font-weight: 800;
   text-align: center;
-
-  @media (max-width: 768px) {
-    font-size: 14px;
-  }
 
   @media (max-width: 480px) {
     font-size: 14px;
@@ -325,11 +271,6 @@ export const StyledAvatar = styled.img`
   display: block;
   object-fit: cover;
 
-  @media (max-width: 768px) {
-    width: 60px;
-    height: 60px;
-  }
-
   @media (max-width: 480px) {
     width: 50px;
     height: 50px;
@@ -340,11 +281,6 @@ export const ButtonGroup = styled.div`
   display: flex;
   gap: 15px;
   margin-top: 20px;
-
-  @media (max-width: 768px) {
-    gap: 12px;
-    margin-top: 15px;
-  }
 
   @media (max-width: 480px) {
     flex-direction: column;
